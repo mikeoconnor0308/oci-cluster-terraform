@@ -20,8 +20,8 @@ EOF
 ClusterNameTag = "mycluster"
 
 InstanceADIndex = ["3"]
-ManagementShape = "VM.Standard1.1"
-ComputeShapes = ["VM.Standard1.2"]
+ManagementShape = "VM.Standard2.1"
+ComputeShapes = ["VM.Standard2.1"]
 ComputeImageOCID = {
   VM.Standard1.2 = {
     // See https://docs.us-phoenix-1.oraclecloud.com/images/
