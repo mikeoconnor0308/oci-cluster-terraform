@@ -1,3 +1,4 @@
+//Sets up the instance.
 resource "oci_core_instance" "ClusterManagement" {
   availability_domain = "${lookup(data.oci_identity_availability_domains.ADs.availability_domains[var.ManagementAD - 1], "name")}"
   compartment_id      = "${var.compartment_ocid}"
@@ -20,7 +21,7 @@ resource "oci_core_instance" "ClusterManagement" {
   }
 
   metadata {
-    ssh_authorized_keys = "${file(var.ssh_public_key)}${data.tls_public_key.oci_public_key.public_key_openssh}"
+    ssh_authorized_keys = "${var.ssh_public_key}"
     user_data           = "${base64encode(file(var.BootStrapFile))}"
   }
 
@@ -34,6 +35,8 @@ resource "oci_core_instance" "ClusterManagement" {
   }
 }
 
+//Copies over the files and runs setup.
+/*
 resource "null_resource" "setup" {
   depends_on = ["oci_core_instance.ClusterManagement"]
 
@@ -41,14 +44,40 @@ resource "null_resource" "setup" {
      cluster_instance = "${oci_core_instance.ClusterManagement.id}"
   }
 
+  provisioner "file" {
+    destination = "/usr/local/openmm"
+    source = "../openmm"
+    connection {
+      timeout = "1m"
+      host = "${oci_core_instance.ClusterManagement.*.public_ip}"
+      user = "opc"
+      private_key = "${var.ssh_private_key}"
+      agent = false
+    }
+  }
+
+
+  provisioner "file" {
+    destination = "/bin"
+    source = "../bin"
+    connection {
+      timeout = "1m"
+      host = "${oci_core_instance.ClusterManagement.*.public_ip}"
+      user = "opc"
+      private_key = "${var.ssh_private_key}"
+      agent = false
+    }
+  }
+
   provisioner "remote-exec" {
     script = "script/setup.sh"
     connection {
-        timeout = "15m"
+        timeout = "1m"
         host = "${oci_core_instance.ClusterManagement.*.public_ip}"
         user = "opc"
-        private_key = "${file(var.private_key_path)}"
+        private_key = "${var.ssh_private_key}"
         agent = false
     }
   }
 }
+*/

@@ -1,3 +1,4 @@
+//Configuration of virtual network.
 resource "oci_core_virtual_network" "ClusterVCN" {
   cidr_block     = "10.1.0.0/16"
   compartment_id = "${var.compartment_ocid}"
@@ -48,13 +49,13 @@ resource "oci_core_security_list" "ClusterSecurityList" {
       source   = "10.0.0.0/8"
     },
     {
-      # Open port for Grafana
+      # Open port for Narupa
       protocol = "6"
       source   = "0.0.0.0/0"
 
       tcp_options {
-        min = 3000
-        max = 3000
+        min = 8000
+        max = 8010
       }
     },
   ]
