@@ -22,7 +22,6 @@ resource "oci_core_instance" "ClusterManagement" {
 
   metadata {
     ssh_authorized_keys = "${var.ssh_public_key}"
-    user_data           = "${base64encode(file(var.BootStrapFile))}"
   }
 
   timeouts {
@@ -36,7 +35,7 @@ resource "oci_core_instance" "ClusterManagement" {
 }
 
 //Copies over the files and runs setup.
-/*
+
 resource "null_resource" "setup" {
   depends_on = ["oci_core_instance.ClusterManagement"]
 
@@ -45,12 +44,12 @@ resource "null_resource" "setup" {
   }
 
   provisioner "file" {
-    destination = "/usr/local/openmm"
+    destination = "openmm"
     source = "../openmm"
     connection {
       timeout = "1m"
       host = "${oci_core_instance.ClusterManagement.*.public_ip}"
-      user = "opc"
+      user = "ubuntu"
       private_key = "${var.ssh_private_key}"
       agent = false
     }
@@ -58,12 +57,12 @@ resource "null_resource" "setup" {
 
 
   provisioner "file" {
-    destination = "/bin"
+    destination = "bin"
     source = "../bin"
     connection {
       timeout = "1m"
       host = "${oci_core_instance.ClusterManagement.*.public_ip}"
-      user = "opc"
+      user = "ubuntu"
       private_key = "${var.ssh_private_key}"
       agent = false
     }
@@ -74,10 +73,9 @@ resource "null_resource" "setup" {
     connection {
         timeout = "1m"
         host = "${oci_core_instance.ClusterManagement.*.public_ip}"
-        user = "opc"
+        user = "ubuntu"
         private_key = "${var.ssh_private_key}"
         agent = false
     }
   }
 }
-*/
