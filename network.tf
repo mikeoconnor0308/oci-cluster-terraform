@@ -58,5 +58,59 @@ resource "oci_core_security_list" "ClusterSecurityList" {
         max = 8010
       }
     },
+    {
+      # Open port for Narupa wss
+      protocol = "6"
+      source   = "0.0.0.0/0"
+
+      tcp_options {
+        min = 80
+        max = 80
+      }
+    },
+    {
+      # Open port for Narupa wss
+      protocol = "6"
+      source = "0.0.0.0/0"
+
+      tcp_options {
+        min = 8080
+        max = 8080
+      }
+    },
+  ]
+
+    // allow outbound tcp traffic
+  egress_security_rules = [
+    {
+      # Open port for Narupa
+      protocol = "6"
+      destination   = "0.0.0.0/0"
+
+      tcp_options {
+        min = 8000
+        max = 8010
+      }
+    },
+    {
+      # Open port for Narupa wss
+      protocol = "6"
+      destination = "0.0.0.0/0"
+
+      tcp_options {
+        min = 80
+        max = 80
+      }
+    },
+    {
+      # Open port for Narupa wss
+      protocol = "6"
+      destination = "0.0.0.0/0"
+
+      tcp_options {
+        min = 8080
+        max = 8080
+      }
+    },
   ]
 }
