@@ -8,6 +8,7 @@ echo 'export LD_LIBRARY_PATH=~/openmm/lib:$LD_LIBRARY_PATH' >> ~/.bashrc
 echo 'export OPENMM_PLUGIN_DIR=~/openmm/lib/plugins' >> ~/.bashrc
 export LD_LIBRARY_PATH=~/openmm/lib:$LD_LIBRARY_PATH
 export OPENMM_PLUGIN_DIR=~/openmm/lib/plugins
-# open up the ports we need: TODO make use application config. 
-sudo ufw allow 8000:8010/tcp
-sudo ufw allow http
+# open up the ports we need:
+sudo iptables -I INPUT 1 -p tcp --dport 8080 -j ACCEPT
+sudo iptables -I INPUT 1 -p tcp --dport 80 -j ACCEPT
+sudo bash -c "iptables-save > /etc/iptables.rules"
