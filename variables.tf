@@ -7,6 +7,8 @@ variable "region" {}
 variable "compartment_ocid" {}
 variable "ssh_public_key" {}
 
+variable "ssh_private_key" {}
+
 variable "ADS" {
   description = "The list of ADs you want to create your cluster across."
   default = ["1"]
