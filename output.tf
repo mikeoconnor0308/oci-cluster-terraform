@@ -7,9 +7,9 @@ output "ComputeHostnames" {
   value = ["${oci_core_instance.ClusterCompute.*.display_name}"]
 }
 
-#output "ComputePublicIPs" {
-#  value = ["${oci_core_instance.ClusterCompute.*.public_ip}"]
-#}
+output "ComputePublicIPs" {
+  value = ["${oci_core_instance.ClusterCompute.*.public_ip}"]
+}
 
 # Output the boot volume IDs of the instance
 #output "BootVolumeIDs" {

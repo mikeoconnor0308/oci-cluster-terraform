@@ -95,7 +95,7 @@ EOF
       timeout = "15m"
       host = "${oci_core_instance.ClusterManagement.*.public_ip}"
       user = "opc"
-      private_key = "${var.ssh_private_key}"
+      private_key = "${file(var.private_key_path)}"
       agent = false
     }
   }
@@ -108,7 +108,7 @@ EOF
       timeout = "15m"
       host = "${oci_core_instance.ClusterManagement.*.public_ip}"
       user = "opc"
-      private_key = "${var.ssh_private_key}"
+      private_key = "${file(var.private_key_path)}"
       agent = false
     }
   }
@@ -125,7 +125,7 @@ EOF
       timeout = "15m"
       host = "${oci_core_instance.ClusterManagement.*.public_ip}"
       user = "opc"
-      private_key = "${var.ssh_private_key}"
+      private_key = "${file(var.private_key_path)}"
       agent = false
     }
   }
@@ -138,7 +138,7 @@ EOF
       timeout = "15m"
       host = "${oci_core_instance.ClusterManagement.*.public_ip}"
       user = "opc"
-      private_key = "${var.ssh_private_key}"
+      private_key = "${file(var.private_key_path)}"
       agent = false
     }
   }
@@ -156,7 +156,7 @@ EOF
       timeout = "15m"
       host = "${oci_core_instance.ClusterManagement.*.public_ip}"
       user = "opc"
-      private_key = "${var.ssh_private_key}"
+      private_key = "${file(var.private_key_path)}"
       agent = false
     }
   }
@@ -172,7 +172,7 @@ EOF
         timeout = "15m"
         host = "${oci_core_instance.ClusterManagement.*.public_ip}"
         user = "opc"
-        private_key = "${var.ssh_private_key}"
+        private_key = "${file(var.private_key_path)}"
         agent = false
     }
   }
@@ -199,7 +199,7 @@ EOF
       timeout = "15m"
       host = "${oci_core_instance.ClusterCompute.*.public_ip[count.index]}"
       user = "opc"
-      private_key = "${var.ssh_private_key}"
+      private_key = "${file(var.private_key_path)}"
       agent = false
     }
   }
@@ -215,7 +215,7 @@ EOF
         timeout = "15m"
         host = "${oci_core_instance.ClusterCompute.*.public_ip[count.index]}"
         user = "opc"
-        private_key = "${var.ssh_private_key}"
+        private_key = "${file(var.private_key_path)}"
         agent = false
     }
   }
