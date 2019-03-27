@@ -85,7 +85,7 @@ VM.DenseIO2.24:
 
   # VM GPU
 VM.GPU2.1: 
-  memory: 104000
+  memory: 72000
   cores_per_socket: 12 
   threads_per_core: 2
 
